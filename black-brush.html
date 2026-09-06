@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLACK BRUSH — парикмахерская в центре Москвы</title>
+<style>
+  :root{
+    --bg:#0a0a0c; --panel:#14141a; --ink:#f1eee9; --muted:#8a857c;
+    --line:rgba(255,255,255,.07); --accent:#c9a96a; --accent-2:#e9c98a;
+    --dark:#050507;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Segoe UI',-apple-system,'Helvetica Neue',Arial,sans-serif;
+    color:var(--ink); background:var(--bg);
+    line-height:1.55; overflow-x:hidden;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(10,10,12,.86);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:66px;padding:0 24px;max-width:1180px;margin:0 auto}
+  .logo{
+    font-size:22px;font-weight:900;letter-spacing:.18em;
+    color:var(--ink);
+  }
+  .logo i{color:var(--accent);font-style:normal}
+  .nav-links{display:flex;gap:28px;font-size:14px;font-weight:600;color:var(--muted)}
+  .nav-links a:hover{color:var(--accent)}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:0;font-weight:700;font-size:14px;letter-spacing:.05em;text-transform:uppercase;border:none;cursor:pointer;transition:.25s}
+  .btn-p{background:var(--accent);color:#0a0a0c}
+  .btn-p:hover{background:var(--accent-2)}
+  .btn-g{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+  .btn-g:hover{border-color:var(--accent);color:var(--accent)}
+  .burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+  .burger span{width:24px;height:2px;background:var(--ink)}
+  @media(max-width:760px){
+    .nav-links{display:none}
+    .nav-links.open{display:flex;position:absolute;top:66px;left:0;right:0;background:var(--panel);flex-direction:column;padding:18px 24px;gap:18px;border-bottom:1px solid var(--line)}
+    .burger{display:flex}
+  }
+
+  /* HERO */
+  .hero{position:relative;background:var(--dark);overflow:hidden}
+  .hero-bg{
+    position:absolute;inset:0;
+    background:url('img/interior.jpg') center/cover no-repeat;
+    opacity:.35;filter:contrast(1.1) grayscale(.4);
+  }
+  .hero::after{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(10,10,12,.55) 0%,rgba(10,10,12,.85) 100%);
+  }
+  .hero-inner{
+    position:relative;z-index:2;
+    max-width:1180px;margin:0 auto;padding:110px 24px 130px;
+  }
+  .kicker{
+    display:inline-block;color:var(--accent);
+    font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+    margin-bottom:22px;
+    border-left:3px solid var(--accent);padding-left:14px;
+  }
+  .hero h1{
+    font-size:clamp(40px,7vw,84px);font-weight:900;
+    letter-spacing:-.02em;line-height:1.02;
+    max-width:780px;
+  }
+  .hero p.lead{
+    font-size:18px;color:#cfcabf;max-width:560px;margin-top:22px;
+  }
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:38px}
+  .hero-stats{display:flex;gap:36px;margin-top:64px;flex-wrap:wrap}
+  .stat b{font-size:32px;color:var(--accent);font-weight:900}
+  .stat span{font-size:14px;color:var(--muted);display:block;margin-top:4px}
+
+  section{padding:96px 24px}
+  .wrap{max-width:1180px;margin:0 auto}
+  .sec-head{margin-bottom:54px;max-width:680px}
+  .sec-head .tag{
+    color:var(--accent);font-size:13px;letter-spacing:.2em;
+    text-transform:uppercase;font-weight:700;
+  }
+  .sec-head h2{
+    font-size:clamp(30px,4vw,46px);font-weight:900;letter-spacing:-.01em;margin:8px 0 14px;line-height:1.08;
+  }
+  .sec-head p{color:var(--muted);font-size:16.5px}
+
+  /* MASTER */
+  .master-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+  .master-photo{position:relative}
+  .master-photo img{
+    width:100%;height:560px;object-fit:cover;border-radius:6px;
+    filter:contrast(1.08) saturate(.85);
+  }
+  .master-photo::before{
+    content:'';position:absolute;left:-14px;bottom:24px;
+    width:120px;height:120px;border:2px solid var(--accent);z-index:-1;
+  }
+  .master-info h2{font-size:42px;font-weight:900;letter-spacing:-.01em;margin-bottom:10px}
+  .master-info .role{color:var(--accent);font-size:15px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:24px}
+  .master-info p{color:#cfcabc;font-size:16px;margin-bottom:16px}
+  .master-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+  .mt{padding:7px 13px;border:1px solid var(--line);font-size:13px;color:var(--muted);font-weight:600;border-radius:30px}
+
+  /* SERVICES */
+  .services{background:var(--panel);border-block:1px solid var(--line)}
+  .price-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .price-blk{
+    background:var(--bg);border:1px solid var(--line);
+    border-radius:8px;padding:30px 32px;
+    position:relative;
+  }
+  .price-blk h3{font-size:19px;font-weight:800;margin-bottom:6px;letter-spacing:.02em}
+  .price-blk .sub{color:var(--muted);font-size:13.5px;margin-bottom:18px}
+  .row{
+    display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+    padding:11px 0;border-bottom:1px dashed var(--line);
+    font-size:15px;
+  }
+  .row:last-child{border-bottom:none}
+  .row b{white-space:nowrap;color:var(--accent)}
+  .price-note{margin-top:24px;text-align:center;color:var(--muted);font-size:13.5px}
+
+  /* REVIEWS */
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .rev{
+    background:var(--panel);border:1px solid var(--line);
+    border-radius:8px;padding:26px 24px;
+  }
+  .stars{color:var(--accent);letter-spacing:2px;font-size:15px;margin-bottom:14px}
+  .rev p{color:#d3cebf;font-size:14.5px;font-style:italic}
+  .rev .who{margin-top:20px;display:flex;align-items:center;gap:12px}
+  .av{width:42px;height:42px;border-radius:50%;background:#2a2a31;color:var(--accent);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
+  .rev .who b{display:block;font-size:14.5px}
+  .rev .who span{font-size:12.5px;color:var(--muted)}
+
+  /* MAP + CONTACTS */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .map-card{position:relative;min-height:450px;background:#1a1a22}
+  .map-card iframe{width:100%;height:100%;min-height:450px;border:0;display:block;filter:grayscale(.4) contrast(.95)}
+  .map-fallback{
+    position:absolute;left:14px;top:14px;background:rgba(10,10,12,.85);
+    padding:8px 12px;border-radius:6px;font-size:12px;color:var(--muted);
+  }
+  .info-card{background:var(--panel);padding:40px 38px;display:flex;flex-direction:column;gap:18px;justify-content:center}
+  .info-card h3{font-size:26px;font-weight:900;margin-bottom:4px}
+  .info-card>p{color:var(--muted);font-size:14.5px}
+  .ci{display:flex;gap:14px;align-items:flex-start}
+  .ci .ic{
+    width:42px;height:42px;border-radius:50%;background:rgba(201,169,106,.12);
+    color:var(--accent);display:flex;align-items:center;justify-content:center;
+    font-size:18px;flex:none;
+  }
+  .ci b{display:block;font-size:15px}
+  .ci span{color:var(--muted);font-size:14px}
+  .route-link{
+    display:inline-flex;align-items:center;gap:8px;color:var(--accent);
+    font-weight:700;font-size:14.5px;border-top:1px solid var(--line);padding-top:18px;margin-top:6px;
+  }
+  .route-link:hover{color:var(--accent-2)}
+
+  /* BOOKING FORM */
+  .booking{background:linear-gradient(180deg,var(--bg) 0%,var(--panel) 100%)}
+  .form-card{
+    max-width:760px;margin:0 auto;background:var(--bg);
+    border:1px solid var(--line);border-radius:10px;padding:40px 44px;
+  }
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .form-grid .full{grid-column:1/-1}
+  label{font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:8px}
+  input,select,textarea{
+    width:100%;padding:14px 16px;background:#1a1a22;border:1.5px solid var(--line);
+    border-radius:6px;font-size:15px;font-family:inherit;color:var(--ink);
+  }
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
+  textarea{resize:vertical;min-height:100px}
+  .form-submit{margin-top:26px;display:flex;gap:14px;flex-wrap:wrap}
+  .form-submit .btn{flex:1;justify-content:center;min-width:200px;padding:14px 22px}
+  .mini{margin-top:14px;font-size:12.5px;color:var(--muted);text-align:center}
+  .ok{
+    display:none;margin-top:18px;padding:14px;border:1px solid var(--accent);
+    color:var(--accent);font-weight:700;text-align:center;border-radius:6px;
+  }
+
+  footer{
+    background:var(--dark);border-top:1px solid var(--line);
+    padding:36px 24px;text-align:center;font-size:13.5px;color:var(--muted);
+  }
+  footer b{color:var(--accent)}
+
+  @media(max-width:900px){
+    .master-grid{grid-template-columns:1fr;gap:32px}
+    .master-photo img{height:380px}
+    .price-grid{grid-template-columns:1fr}
+    .rev-grid{grid-template-columns:1fr}
+    .contact-grid{grid-template-columns:1fr}
+    .form-grid{grid-template-columns:1fr}
+    section{padding:60px 20px}
+    .hero-inner{padding:80px 20px 90px}
+    .form-card{padding:28px 22px}
+  }
+  @media(max-width:480px){
+    .hero-cta{flex-direction:column;align-items:stretch}
+    .btn{justify-content:center}
+    .info-card{padding:28px 22px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="logo" href="#top">BLACK<i>·</i>BRUSH</a>
+    <button class="burger" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="Меню"><span></span><span></span><span></span></button>
+    <div class="nav-links">
+      <a href="#master">Мастер</a>
+      <a href="#services">Услуги и цены</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#contacts">Контакты</a>
+      <a href="#book" class="btn btn-p">Записаться</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <span class="kicker">Мужская парикмахерская · Москва · с 2017</span>
+    <h1>Стрижка как&nbsp;ритуал. Стиль как&nbsp;заявление.</h1>
+    <p class="lead">BLACK BRUSH — это один мастер, полная концентрация внимания на вас, атмосфера частного кабинета и стрижки, которые держат форму до следующего визита.</p>
+    <div class="hero-cta">
+      <a href="#book" class="btn btn-p">Записаться онлайн</a>
+      <a href="#services" class="btn btn-g">Смотреть цены</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><b>9 лет</b><span>опыт мастера</span></div>
+      <div class="stat"><b>1 место</b><span>без ожидания и очередей</span></div>
+      <div class="stat"><b>5.0 ★</b><span>средняя оценка в 2ГИС</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- MASTER -->
+<section id="master">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Мастер</span>
+      <h2>Один мастер — всё внимание вам</h2>
+      <p>Никаких ротаций, никаких «подойдите к свободному креслу». От первой консультации до финальной укладки — только я.</p>
+    </div>
+    <div class="master-grid">
+      <div class="master-photo">
+        <img src="img/master.jpg" alt="Артём Громов — мастер парикмахерской Black Brush">
+      </div>
+      <div class="master-info">
+        <h2>Артём&nbsp;Громов</h2>
+        <div class="role">Основатель и ведущий барбер</div>
+        <p>Девять лет в индустрии: путь начинал в московских сетях, последние пять лет работаю в формате частного кабинета. Специализируюсь на классических мужских стрижках, оформлении бороды и аккуратных фейдах.</p>
+        <p>Не гонюсь за трендами ради трендов. Делаю стрижку, которая сядет именно под вашу форму головы, тип волос и ритм жизни.</p>
+        <div class="master-tags">
+          <span class="mt">Классика</span>
+          <span class="mt">Фейды</span>
+          <span class="mt">Борода</span>
+          <span class="mt">Текстурные срезы</span>
+          <span class="mt">Подростки от 12+</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Услуги и цены</span>
+      <h2>Прайс-лист</h2>
+      <p>Фиксированная стоимость. Итоговый чек не меняется по окончании визита — всё обсуждаем заранее.</p>
+    </div>
+    <div class="price-grid">
+
+      <div class="price-blk">
+        <h3>Стрижки</h3>
+        <div class="sub">Классика и современные формы</div>
+        <div class="row"><span>Мужская стрижка</span><b>2 500 ₽</b></div>
+        <div class="row"><span>Модельная стрижка</span><b>3 200 ₽</b></div>
+        <div class="row"><span>Стрижка машинкой (одна длина)</span><b>1 500 ₽</b></div>
+        <div class="row"><span>Фейд / skin fade</span><b>2 800 ₽</b></div>
+        <div class="row"><span>Стрижка + оформление бороды</span><b>3 800 ₽</b></div>
+        <div class="row"><span>Детская стрижка (до 14 лет)</span><b>1 800 ₽</b></div>
+      </div>
+
+      <div class="price-blk">
+        <h3>Борода и оформление</h3>
+        <div class="sub">Опасное бритьё и моделирование</div>
+        <div class="row"><span>Оформление бороды</span><b>1 500 ₽</b></div>
+        <div class="row"><span>Королевское бритьё опасной бритвой</span><b>2 500 ₽</b></div>
+        <div class="row"><span>Стрижка бороды + контур</span><b>2 000 ₽</b></div>
+        <div class="row"><span>Камуфляж седины</span><b>1 200 ₽</b></div>
+        <div class="row"><span>Чёрная маска для лица</span><b>800 ₽</b></div>
+        <div class="row"><span>Уход за кожей головы</span><b>1 200 ₽</b></div>
+      </div>
+
+    </div>
+    <p class="price-note">* Длительность визита — от 45 минут. Запись строго по времени, опоздание более 15 минут = перенос.</p>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Отзывы</span>
+      <h2>Что говорят клиенты</h2>
+      <p>Средняя оценка мастера — 5.0 ★ на основе 140+ отзывов в Яндекс Картах и 2ГИС.</p>
+    </div>
+    <div class="rev-grid">
+      <div class="rev">
+        <div class="stars">★★★★★</div>
+        <p>«Хожу к Артёму второй год. Стрижёт ровно так, как обсудили — без сюрпризов дома перед зеркалом. Атмосфера камерная, кофе варят нормальный, подкасты обсуждаем.»</p>
+        <div class="who"><div class="av">МК</div><div><b>Михаил К.</b><span>стрижка + борода</span></div></div>
+      </div>
+      <div class="rev">
+        <div class="stars">★★★★★</div>
+        <p>«Записался на фейд, приехал с фоткой — сделал 1-в-1, но ещё лучше. Приятно, когда мастер сначала спросил про образ жизни, а уже потом взял в руки ножницы.»</p>
+        <div class="who"><div class="av">ДШ</div><div><b>Денис Ш.</b><span>skin fade</span></div></div>
+      </div>
+      <div class="rev">
+        <div class="stars">★★★★★</div>
+        <p>«Брил у Артёма бороду опасной бритвой впервые — никакого раздражения, никаких порезов. Плюс дал дельные советы по уходу в домашних условиях.»</p>
+        <div class="who"><div class="av">АП</div><div><b>Андрей П.</b><span>королевское бритьё</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP + CONTACTS -->
+<section id="contacts">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Контакты</span>
+      <h2>Как нас найти</h2>
+      <p>Кабинет находится в пяти минутах от метро «Чистые пруды» / «Китай-город». Вход со двора, второй этаж.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="map-card">
+        <iframe title="Карта: BLACK BRUSH, Москва, ул. Покровка, 4" src="https://www.openstreetmap.org/export/embed.html?bbox=37.6423%2C55.7557%2C37.6663%2C55.7657&amp;layer=mapnik&amp;marker=55.7607%2C37.6543" loading="lazy"></iframe>
+        <div class="map-fallback">Если карта не загрузилась — откройте ссылку ниже</div>
+      </div>
+      <div class="info-card">
+        <h3>BLACK&nbsp;BRUSH</h3>
+        <p>Парикмахерская Артёма Громова. Один мастер, индивидуальная запись.</p>
+
+        <div class="ci"><div class="ic">📍</div><div><b>Адрес</b><span>Москва, ул. Покровка, 4, 2 этаж</span></div></div>
+        <div class="ci"><div class="ic">🕐</div><div><b>Режим работы</b><span>Пн–Сб: 10:00 – 21:00<br>Вс: выходной</span></div></div>
+        <div class="ci"><div class="ic">📞</div><div><b>Телефон</b><span><a href="tel:+74951234567">+7 (495) 123-45-67</a></span></div></div>
+        <div class="ci"><div class="ic">✉️</div><div><b>Почта</b><span>hello@blackbrush.ru</span></div></div>
+
+        <a class="route-link" href="https://www.openstreetmap.org/?mlat=55.7607&mlon=37.6543#map=17/55.7607/37.6543" target="_blank" rel="noopener">🧭 Открыть маршрут на карте</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="book">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Запись</span>
+      <h2>Записаться на визит</h2>
+      <p>Оставьте заявку — мастер перезвонит в течение 30 минут, чтобы подтвердить время и подобрать услугу.</p>
+    </div>
+
+    <form class="form-card" id="bookForm" onsubmit="return sendBooking(event)">
+      <div class="form-grid">
+        <div><label>Имя</label><input id="f-name" type="text" required placeholder="Как к вам обращаться"></div>
+        <div><label>Телефон</label><input id="f-phone" type="tel" required placeholder="+7 (___) ___-__-__"></div>
+        <div><label>Услуга</label>
+          <select id="f-svc" required>
+            <option>Мужская стрижка</option>
+            <option>Модельная стрижка</option>
+            <option>Фейд / skin fade</option>
+            <option>Стрижка + борода</option>
+            <option>Оформление бороды</option>
+            <option>Королевское бритьё</option>
+            <option>Детская стрижка</option>
+          </select>
+        </div>
+        <div><label>Удобная дата</label><input id="f-date" type="date" required></div>
+        <div><label>Удобное время</label>
+          <select id="f-time" required>
+            <option>10:00 – 12:00</option>
+            <option>12:00 – 14:00</option>
+            <option>14:00 – 16:00</option>
+            <option>16:00 – 18:00</option>
+            <option>18:00 – 20:00</option>
+          </select>
+        </div>
+        <div><label>Способ связи</label>
+          <select id="f-channel" required>
+            <option value="phone">Перезвонить</option>
+            <option value="whatsapp">WhatsApp</option>
+            <option value="telegram">Telegram</option>
+          </select>
+        </div>
+        <div class="full"><label>Комментарий</label><textarea id="f-msg" placeholder="Пожелания, длина волос, форма бороды, аллергии…"></textarea></div>
+      </div>
+
+      <div class="form-submit">
+        <button type="submit" class="btn btn-p">Отправить заявку</button>
+        <a href="https://wa.me/74951234567?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F" target="_blank" rel="noopener" class="btn btn-g">💬 Написать в WhatsApp</a>
+      </div>
+
+      <div class="ok" id="ok">✓ Заявка готова! Мастер свяжется с вами по выбранному каналу в течение 30 минут.</div>
+      <p class="mini">Заявка обрабатывается мастером лично. Данные используются только для подтверждения записи.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  © 2026 <b>BLACK&nbsp;BRUSH</b> · Москва · Покровка, 4 · Пн–Сб 10:00–21:00
+</footer>
+
+<script>
+function sendBooking(e){
+  e.preventDefault();
+  var name=document.getElementById('f-name').value.trim();
+  var phone=document.getElementById('f-phone').value.trim();
+  var svc=document.getElementById('f-svc').value;
+  var date=document.getElementById('f-date').value;
+  var time=document.getElementById('f-time').value;
+  var msg=document.getElementById('f-msg').value.trim();
+  var ch=document.getElementById('f-channel').value;
+
+  if(!name||!phone||!svc||!date||!time){
+    alert('Заполните обязательные поля: имя, телефон, услуга, дата и время.');
+    return false;
+  }
+
+  var text='Запись в BLACK BRUSH\nИмя: '+name+'\nТелефон: '+phone+
+           '\nУслуга: '+svc+'\nДата: '+date+'\nВремя: '+time+
+           (msg?'\nКомментарий: '+msg:'');
+
+  if(ch==='whatsapp'){
+    window.open('https://wa.me/74951234567?text='+encodeURIComponent(text),'_blank');
+  }else if(ch==='telegram'){
+    window.open('https://t.me/+74951234567?text='+encodeURIComponent(text),'_blank');
+  }
+
+  document.getElementById('ok').style.display='block';
+  document.getElementById('bookForm').reset();
+  setTimeout(function(){document.getElementById('ok').style.display='none';},12000);
+  return false;
+}
+</script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>
